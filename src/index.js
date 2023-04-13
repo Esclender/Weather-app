@@ -1,17 +1,43 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './components/App'
+import Exapmle from './components/Check'
+import axios from 'axios'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const api = axios.create({
+  baseURL: 'http://api.weatherapi.com/v1',
+  headers: {
+    Key: process.env.REACT_APP_API_KEY_WEATHER,
+    'Content-Type': 'application/json;charset=utf-8'
+  }
+})
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const api2 = axios.create({
+  baseURL: 'https://restcountries.com/v3.1/name',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  }
+})
+
+export const api3 = axios.create({
+  baseURL: 'http://localhost:3001',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  }
+})
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+const app = () => {
+  root.render(
+    <React.StrictMode>
+      <App api={api} api2={api2} />
+      <hr />
+
+      <Exapmle />
+    </React.StrictMode>
+  )
+}
+
+app()
+
+export default api
